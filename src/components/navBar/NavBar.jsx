@@ -98,11 +98,11 @@ const BgDiv = styled.div`
   background-color: #a74bfe;
   top: -1000px;
   left: -2000px;
-  z-index: -1;
   width: 100%;
   height: 100%;
   transition: all 0.6s ease;
-
+  z-index: -1;
+  
   &.active {
     border-radius: 0 0 70% 0;
     top: 0;

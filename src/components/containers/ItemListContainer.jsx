@@ -9,7 +9,9 @@ const ItemListContainer = ({greeting}) => {
 export default ItemListContainer
 
 const Container = styled.div`
+position: relative;
 text-align: center;
 font-size: 2rem;
 margin-top: 2rem;
+z-index: -1000;
 `
