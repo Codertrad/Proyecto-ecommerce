@@ -1,3 +1,4 @@
+//STYLES
 import { FaShoppingCart } from "react-icons/fa";
 import styled from "styled-components";
 

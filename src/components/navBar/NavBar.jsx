@@ -1,9 +1,12 @@
-import styled from "styled-components";
+//COMPONENTS
 import BurguerButton from "./BurguerButton";
 import CartWidget from "./CartWidget";
+//HOOKS
 import { useState } from "react";
+//STYLES
+import styled from "styled-components";
 
-const NavBar = () => {
+const NavBar = ({ counter }) => {
   const [clicked, setClicked] = useState(false);
   const handleClick = () => {
     setClicked(!clicked);
@@ -27,7 +30,7 @@ const NavBar = () => {
             <a href="/">FRAGANCIAS</a>
           </li>
         </ul>
-        <CartWidget counter={4}/>
+        <CartWidget counter={counter} />
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
@@ -52,6 +55,8 @@ const NavContainer = styled.nav`
     top: -700px;
     left: -3000px;
     text-align: center;
+    transition: all 0.6s ease;
+
     .link {
       margin-top: 1rem;
       padding: 0;
@@ -102,7 +107,7 @@ const BgDiv = styled.div`
   height: 100%;
   transition: all 0.6s ease;
   z-index: -1;
-  
+
   &.active {
     border-radius: 0 0 70% 0;
     top: 0;

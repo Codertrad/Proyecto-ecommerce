@@ -1,3 +1,4 @@
+//STYLES
 import styled from "styled-components";
 
 const BurguerButton = ({ handleClick, clicked }) => {

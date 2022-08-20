@@ -1,0 +1,74 @@
+//HOOKS
+import { useState } from "react";
+//STYLES
+import styled from "styled-components";
+
+const ItemCount = ({ initial, stock, onAdd }) => {
+  const [counter, setCounter] = useState(initial);
+
+  const increment = () => {
+    if (counter < stock) {
+      setCounter(counter + 1);
+    }
+  };
+
+  const decrement = () => {
+    if (counter > initial) {
+      setCounter(counter - 1);
+    }
+  };
+  return (
+    <>
+      <Card>
+        <div className="containerCard">
+          <button onClick={decrement}>-</button>
+          <span>{counter}</span>
+          <button onClick={increment}>+</button>
+        </div>
+        <div className="addCart">
+          <button onClick={() => onAdd(counter)}>Agregar al carrito</button>
+        </div>
+      </Card>
+    </>
+  );
+};
+
+export default ItemCount;
+
+const Card = styled.div`
+  background-color: #d32be2c7;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  max-width: fit-content;
+  .containerCard {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    button {
+      padding: 0.2rem 2.5rem;
+      font-size: 1.7rem;
+      background-color: #9941ec;
+      border: none;
+      border-radius: 1.2rem;
+      color: #ffff;
+    }
+    span {
+      margin: 0 1.2rem;
+      color: #ffff;
+    }
+  }
+  .addCart {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    button {
+      border: none;
+      padding: 0.5rem 2.5rem;
+      background-color: #9941ec;
+      font-size: 1.5rem;
+      border-radius: 1.2rem;
+      color: #ffff;
+    }
+  }
+`;
