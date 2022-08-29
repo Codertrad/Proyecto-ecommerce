@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //COMPONENTS
 import ItemCount from "../itemCount/ItemCount";
 import NavBar from "../navBar/NavBar";
-import ItemList from "../itemList/ItemList"
+import ItemList from "../itemList/ItemList";
 //HOOKS
-import { useState } from "react";
+import { useState, useEffect } from "react";
 //STYLES
 import styled from "styled-components";
 //ASSETS
@@ -13,6 +14,7 @@ import aguaRosas from "../../assets/agua-rosas.jpeg";
 
 const ItemListContainer = ({ greeting }) => {
   const [cartStateCount, setCartState] = useState();
+  const [productos, setProductos] = useState([]);
 
   const onAdd = (counter) => {
     setCartState(counter);
@@ -42,8 +44,24 @@ const ItemListContainer = ({ greeting }) => {
         "Agua de rosas es un producto que debes tener en tu kit de cuidado personal. Ya que calma, regenera, hidrata y tonifica. Tiene poderes antiinflamatorios.",
       price: 13500,
       pictureUrl: aguaRosas,
-    }
+    },
   ];
+
+  const mostrarArticulos = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(articulos);
+      }, 3000);
+    });
+  };
+
+  useEffect(() => {
+    const respuestaArticulos = async () => {
+      const listadoArticulos = await mostrarArticulos();
+      setProductos(listadoArticulos)
+    };
+    respuestaArticulos()
+  }, []);
 
   return (
     <>
@@ -51,7 +69,7 @@ const ItemListContainer = ({ greeting }) => {
       <Container>
         {greeting}
         <ItemCount stock={10} initial={1} onAdd={onAdd} />
-        <ItemList articulos = {articulos}/>
+        <ItemList articulos={productos} />
       </Container>
     </>
   );
