@@ -36,11 +36,13 @@ const ItemCount = ({ initial, stock, onAdd }) => {
 export default ItemCount;
 
 const Card = styled.div`
-  background-color: #d32be2c7;
-  margin: 3rem auto;
-  padding: 1.5rem;
+  background-color: #f8f8f8;
+  margin: 0 auto;
+  padding: 1.2rem;
   border-radius: 1.2rem;
   max-width: fit-content;
+
+
   .containerCard {
     display: flex;
     justify-content: space-evenly;
@@ -55,7 +57,9 @@ const Card = styled.div`
     }
     span {
       margin: 0 1.2rem;
-      color: #ffff;
+      color: #000;
+      font-size: 2rem;
+      font-weight: bolder;
     }
   }
   .addCart {
@@ -70,5 +74,21 @@ const Card = styled.div`
       border-radius: 1.2rem;
       color: #ffff;
     }
+  }
+
+  @media ( min-width: 768px){
+    .addCart {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    button {
+      border: none;
+      padding: 0.5rem 2.5rem;
+      background-color: #9941ec;
+      font-size: 1.2rem;
+      border-radius: 1.2rem;
+      color: #ffff;
+    }
+  }
   }
 `;

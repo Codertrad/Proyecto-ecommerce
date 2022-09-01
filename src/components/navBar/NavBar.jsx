@@ -43,12 +43,24 @@ const NavBar = ({ counter }) => {
 export default NavBar;
 
 const NavContainer = styled.nav`
+  width: 100%;
+  top: 0;
   background-color: #8a2be2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 1.2rem;
   color: white;
+  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.72);
+  -webkit-box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.72);
+  position: sticky;
+  z-index: +2;
+
+
+  .burguer{
+    z-index: +3;
+  }
 
   .links__container {
     position: absolute;
@@ -56,6 +68,7 @@ const NavContainer = styled.nav`
     left: -3000px;
     text-align: center;
     transition: all 0.6s ease;
+    z-index: +2;
 
     .link {
       margin-top: 1rem;
@@ -85,10 +98,11 @@ const NavContainer = styled.nav`
     display: block;
     position: absolute;
     margin: 0;
-    top: 30%;
+    top: 350%;
     left: 0;
     right: 0;
     text-align: center;
+    z-index: +3;
   }
 
   .burguer {
@@ -106,13 +120,17 @@ const BgDiv = styled.div`
   width: 100%;
   height: 100%;
   transition: all 0.6s ease;
-  z-index: -1;
+  box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.39) inset;
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.39) inset;
+  -moz-box-shadow: 7px 7px 5px 0px rgba(0, 0, 0, 0.39) inset;
+  z-index: +1;
 
   &.active {
     border-radius: 0 0 70% 0;
-    top: 0;
+    top: 5.7rem;
     left: 0;
     width: 100%;
     height: 100%;
+    position: fixed;
   }
 `;

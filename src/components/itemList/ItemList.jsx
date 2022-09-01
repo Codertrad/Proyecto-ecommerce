@@ -7,7 +7,7 @@ const ItemList = ({articulos}) => {
     <ContainerProducts>
     <div className="container">{
       articulos.map((articulo)=>{
-         return <Item articulo={articulo}/>
+         return <Item key={articulo.id} articulo={articulo}/>
       })
     }</div>
     </ContainerProducts>
@@ -21,6 +21,7 @@ const ContainerProducts = styled.div`
    .container{
       display: flex;
       justify-content: space-evenly;
+      flex-wrap: wrap;
    }
 }
 `
