@@ -3,17 +3,23 @@ import ItemDetail from "../itemDetail/ItemDetail";
 import { getItem } from "../helper/articulos";
 //HOOKS
 import { useState , useEffect } from "react";
+import {useParams} from "react-router-dom"
 //STYLES
 import styled from "styled-components";
 
 const ItemDetailContainer = () => {
 
   const [producto, setProducto ] = useState([])
+  const {id} = useParams();
 
   useEffect(()=>{
-    getItem
-    .then(productos => setProducto(productos.find(prod => prod.id === 1)))
-  },[])
+   const obtenerProducto = async () =>{
+    const listaProductos = await getItem();
+    const filtrado = listaProductos.find(producto => producto.id === id)
+    setProducto(filtrado)
+  }
+   obtenerProducto();
+  },[id])
 
   return (
     <>

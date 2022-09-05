@@ -1,19 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Item = ({ articulo }) => {
-
+  const { id ,title, description, price, pictureUrl } = articulo;
   return (
     <>
       <Card>
-        <h3 className="title">{articulo.title}</h3>
+        <h3 className="title">{title}</h3>
         <div className="imgContainer">
-          <img src={articulo.pictureUrl} alt="/" />
+          <img src={pictureUrl} alt="/" />
         </div>
         <div>
-          <p className="description">{articulo.description}</p>
-          <p className="price">$ {articulo.price} COP</p>
-          <button>Ver detalles</button>
+          <p className="description">{description}</p>
+          <p className="price">$ {price} COP</p>
+          <Link to={`/item/${id}`}>
+            <button>Ver detalles</button>
+          </Link>
         </div>
       </Card>
     </>
@@ -94,7 +97,7 @@ const Card = styled.div`
     }
   }
 
-  @media (min-width: 1299px){
+  @media (min-width: 1299px) {
     margin: 1rem;
     background-color: #f8f8f8;
     width: 25rem;
@@ -103,4 +106,4 @@ const Card = styled.div`
       height: 25rem;
     }
   }
-`
+`;

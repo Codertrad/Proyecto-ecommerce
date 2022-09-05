@@ -3,6 +3,8 @@ import BurguerButton from "./BurguerButton";
 import CartWidget from "./CartWidget";
 //HOOKS
 import { useState } from "react";
+//ROUTES
+import { Link } from "react-router-dom";
 //STYLES
 import styled from "styled-components";
 
@@ -15,19 +17,19 @@ const NavBar = ({ counter }) => {
   return (
     <>
       <NavContainer>
-        <h2 className="logo">LOGO</h2>
+        <Link className="logo" to="/">LOGO</Link>
         <ul className={`links__container ${clicked ? "active" : ""}`}>
           <li className="link">
-            <a href="/">INICIO</a>
+            <Link to="/">INICIO</Link>
           </li>
           <li className="link">
-            <a href="/">MAQUILLAJE</a>
+            <Link to="/category/maquillaje">MAQUILLAJE</Link>
           </li>
           <li className="link">
-            <a href="/">ACCESORIOS</a>
+            <Link to="/category/accesorios">ACCESORIOS</Link>
           </li>
           <li className="link">
-            <a href="/">FRAGANCIAS</a>
+            <Link to="/category/fragancias">FRAGANCIAS</Link>
           </li>
         </ul>
         <CartWidget counter={counter} />
@@ -57,6 +59,11 @@ const NavContainer = styled.nav`
   position: sticky;
   z-index: +2;
 
+  .logo{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
 
   .burguer{
     z-index: +3;

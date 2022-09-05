@@ -3,7 +3,7 @@ import { useState } from "react";
 //STYLES
 import styled from "styled-components";
 
-const ItemCount = ({ initial, stock, onAdd }) => {
+const ItemCount = ({ initial, stock, /* onAdd  */}) => {
   const [counter, setCounter] = useState(initial);
 
   const increment = () => {
@@ -26,7 +26,7 @@ const ItemCount = ({ initial, stock, onAdd }) => {
           <button onClick={increment}>+</button>
         </div>
         <div className="addCart">
-          <button onClick={() => onAdd(counter)}>Agregar al carrito</button>
+          <button /* onClick={() => onAdd(counter)} */>Agregar al carrito</button>
         </div>
       </Card>
     </>
