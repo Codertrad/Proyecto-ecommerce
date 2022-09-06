@@ -5,9 +5,9 @@ import ItemCount from "../itemCount/ItemCount";
 const ItemDetail = ({ producto }) => {
   const { title, description, price, pictureUrl } = producto;
 
- /*  const onAdd = (counter) => {
-    //setCartState(counter);
-  }; */
+  const onAdd = (counter) => {
+    console.log("Counter:", counter)
+  };
 
   return (
     <Container>
@@ -20,7 +20,7 @@ const ItemDetail = ({ producto }) => {
           <h3 className="title">{title}</h3>
           <p className="description">{description}</p>
           <p className="price">$ {price}</p>
-          <ItemCount stock={10} initial={1} /* onAdd={onAdd} *//>
+          <ItemCount stock={10} initial={1} onAdd={onAdd}/>
         </div>
       </CardContainer>
     </Container>
