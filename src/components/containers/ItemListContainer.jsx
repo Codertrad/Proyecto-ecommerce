@@ -28,7 +28,7 @@ const ItemListContainer = ({ greeting }) => {
   return (
     <>
       <Container>
-        <h1>{greeting}</h1>
+        <h1>{greeting} {categoryId}</h1>
         <ItemList articulos={productos} />
       </Container>
     </>
@@ -40,9 +40,9 @@ export default ItemListContainer;
 const Container = styled.div`
   text-align: center;
   font-size: 2rem;
-  margin-top: 2rem;
   h1{
-    margin-bottom:2rem;
+    margin:2rem 0;
     font-size: 2rem;
+
     }
 `;
