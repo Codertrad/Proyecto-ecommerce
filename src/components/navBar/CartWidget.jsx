@@ -18,8 +18,10 @@ export default CartWidget;
 const Cart = styled.nav`
   .icon{
    font-size: 2rem;
+   color: white;
   }
   .counter{
    font-size: 1.5rem;
+   color:white
   }
 `;

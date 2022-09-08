@@ -1,12 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+//Componentes
 import ItemCount from "../itemCount/ItemCount";
+//Hooks
+//Estilos
+import styled from "styled-components";
+//context
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ producto }) => {
+  //Llamamos la funcion addProduct a traves de context que agrega un nuevo producto al array del carrito
+  const { addProduct } = useContext(CartContext);
   const { title, description, price, pictureUrl } = producto;
 
-  const onAdd = (counter) => {
-    console.log("Counter:", counter)
+  //Esta funcion trae desde el ItemCount la propiedad count que es el contador
+  const onAdd = (count) => {
+    //variable que agrega en una nueva propiedad quantity el valor de count que es la cantidad de items.
+    const newProduct = { ...producto, quantity: count };
+    //le pasamos a la funcion del context el nuevo producto
+    addProduct(newProduct);
   };
 
   return (
@@ -20,7 +31,7 @@ const ItemDetail = ({ producto }) => {
           <h3 className="title">{title}</h3>
           <p className="description">{description}</p>
           <p className="price">$ {price}</p>
-          <ItemCount stock={10} initial={1} onAdd={onAdd}/>
+          <ItemCount stock={10} initial={1} onAdd={onAdd} />
         </div>
       </CardContainer>
     </Container>
@@ -90,7 +101,7 @@ const CardContainer = styled.div`
     }
     .title {
       font-size: 1.5rem;
-      padding: .8rem 0;
+      padding: 0.8rem 0;
     }
     .description {
       font-size: 1rem;

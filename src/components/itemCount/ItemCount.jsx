@@ -2,19 +2,26 @@
 import { useState } from "react";
 //STYLES
 import styled from "styled-components";
+//Routes
+import {Link} from "react-router-dom"
 
 const ItemCount = ({ initial, stock, onAdd }) => {
-  const [counter, setCounter] = useState(initial);
+  const [count, setCount] = useState(initial);
+  const [click, setClick] = useState(false);
+
+  const manejadorClick = () => {
+    setClick(!click);
+  };
 
   const increment = () => {
-    if (counter < stock) {
-      setCounter(counter + 1);
+    if (count < stock) {
+      setCount(count + 1);
     }
   };
 
   const decrement = () => {
-    if (counter > initial) {
-      setCounter(counter - 1);
+    if (count > initial) {
+      setCount(count - 1);
     }
   };
   return (
@@ -22,11 +29,19 @@ const ItemCount = ({ initial, stock, onAdd }) => {
       <Card>
         <div className="containerCard">
           <button onClick={decrement}>-</button>
-          <span>{counter}</span>
+          <span>{count}</span>
           <button onClick={increment}>+</button>
         </div>
         <div className="addCart">
-          <button onClick={() => onAdd(counter)}>Agregar al carrito</button>
+          <button
+            className={`${click ? "inActive" : ""}`}
+            onClick={/* () => onAdd(count) */ manejadorClick}
+          >
+            Agregar al carrito
+          </button>
+          <Link to="/cart"><button className={`${click ? "" : "inActive"}`}>
+            Terminar Compra
+          </button></Link>
         </div>
       </Card>
     </>
@@ -41,7 +56,6 @@ const Card = styled.div`
   padding: 1.2rem;
   border-radius: 1.2rem;
   max-width: fit-content;
-
 
   .containerCard {
     display: flex;
@@ -76,19 +90,23 @@ const Card = styled.div`
     }
   }
 
-  @media ( min-width: 768px){
-    .addCart {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    button {
-      border: none;
-      padding: 0.5rem 2.5rem;
-      background-color: #9941ec;
-      font-size: 1.2rem;
-      border-radius: 1.2rem;
-      color: #ffff;
-    }
+  .inActive {
+    display: none;
   }
+
+  @media (min-width: 768px) {
+    .addCart {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      button {
+        border: none;
+        padding: 0.5rem 2.5rem;
+        background-color: #9941ec;
+        font-size: 1.2rem;
+        border-radius: 1.2rem;
+        color: #ffff;
+      }
+    }
   }
 `;

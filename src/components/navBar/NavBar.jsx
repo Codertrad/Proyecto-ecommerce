@@ -32,7 +32,7 @@ const NavBar = ({ counter }) => {
             <Link to="/category/fragancias">FRAGANCIAS</Link>
           </li>
         </ul>
-        <CartWidget counter={counter} />
+        <Link to="/cart"><CartWidget counter={counter} /></Link>
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>

@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { HiArrowLeft } from "react-icons/hi";
 import { HiArrowRight } from "react-icons/hi";
 //Hooks
-import { useRef, useEffect } from "react";
+import { useRef, /* useEffect */ } from "react";
 
 const SlideShow = () => {
   const slideshow = useRef(null);
@@ -62,11 +62,11 @@ const SlideShow = () => {
     }
   };
   //Autoplay
-  useEffect(() => {
+ /*  useEffect(() => {
     setInterval(() => {
       siguiente();
     }, 9000);
-  }, []);
+  }, []); */
 
   return (
     <ContenedorPrincipal>

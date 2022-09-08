@@ -5,7 +5,7 @@ import vitaminaC from "../../assets/vitamina-c.jpeg";
 import glitterSpray from "../../assets/glitter-spray.jpeg";
 import labialMate from "../../assets/labial-nude-mate.jpeg";
 
-const articulos = [
+export const articulos = [
   {
     id: "1",
     title: "KIT COMPLETO RAYMAR",
