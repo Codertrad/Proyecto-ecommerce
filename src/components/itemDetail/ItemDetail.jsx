@@ -9,15 +9,13 @@ import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ producto }) => {
   //Llamamos la funcion addProduct a traves de context que agrega un nuevo producto al array del carrito
-  const { addProduct } = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
   const { title, description, price, pictureUrl } = producto;
 
   //Esta funcion trae desde el ItemCount la propiedad count que es el contador
   const onAdd = (count) => {
-    //variable que agrega en una nueva propiedad quantity el valor de count que es la cantidad de items.
-    const newProduct = { ...producto, quantity: count };
-    //le pasamos a la funcion del context el nuevo producto
-    addProduct(newProduct);
+   const newPoduct = producto
+    addItem(newPoduct,count);
   };
 
   return (
