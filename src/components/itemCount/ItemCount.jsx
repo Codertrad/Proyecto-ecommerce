@@ -3,7 +3,7 @@ import { useState } from "react";
 //STYLES
 import styled from "styled-components";
 //Routes
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const ItemCount = ({ initial, stock, onAdd }) => {
   const [count, setCount] = useState(initial);
@@ -39,9 +39,11 @@ const ItemCount = ({ initial, stock, onAdd }) => {
           >
             Agregar al carrito
           </button>
-          <Link to="/cart"><button className={`${click ? "" : "inActive"}`}>
-            Terminar Compra
-          </button></Link>
+          <Link to="/cart">
+            <button className={`${click ? "" : "inActive"}`}>
+              Terminar Compra
+            </button>
+          </Link>
         </div>
       </Card>
     </>
@@ -68,6 +70,11 @@ const Card = styled.div`
       border: none;
       border-radius: 1.2rem;
       color: #ffff;
+      cursor: pointer;
+      transition: all ease-in 0.3s;
+      &:hover {
+        background-color: #d32be2c7;
+      }
     }
     span {
       margin: 0 1.2rem;
@@ -87,6 +94,11 @@ const Card = styled.div`
       font-size: 1.5rem;
       border-radius: 1.2rem;
       color: #ffff;
+      cursor: pointer;
+      transition: all ease-in 0.3s;
+      &:hover {
+        background-color: #d32be2c7;
+      }
     }
   }
 

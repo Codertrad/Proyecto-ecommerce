@@ -14,8 +14,8 @@ const ItemDetail = ({ producto }) => {
 
   //Esta funcion trae desde el ItemCount la propiedad count que es el contador
   const onAdd = (count) => {
-   const newPoduct = producto
-    addItem(newPoduct,count);
+    const newPoduct = producto;
+    addItem(newPoduct, count);
   };
 
   return (

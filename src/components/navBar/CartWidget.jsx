@@ -1,14 +1,18 @@
 //STYLES
 import { FaShoppingCart } from "react-icons/fa";
 import styled from "styled-components";
+//Context
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
-const CartWidget = ({ counter }) => {
+const CartWidget = () => {
+  const {quantity} = useContext(CartContext)
   return (
     <Cart>
       <span className="icon">
         <FaShoppingCart />
       </span>
-      <span className="counter"> {counter}</span>
+      <span className={`${quantity <= 0 ? "inactive": "counter" }`}>{quantity}</span>
     </Cart>
   );
 };
@@ -22,6 +26,9 @@ const Cart = styled.nav`
   }
   .counter{
    font-size: 1.5rem;
-   color:white
+   color:white;
+  }
+  .inactive{
+    display: none;
   }
 `;

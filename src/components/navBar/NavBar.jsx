@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 //STYLES
 import styled from "styled-components";
 
-const NavBar = ({ counter }) => {
+const NavBar = () => {
   const [clicked, setClicked] = useState(false);
   const handleClick = () => {
     setClicked(!clicked);
@@ -32,7 +32,7 @@ const NavBar = ({ counter }) => {
             <Link to="/category/fragancias">FRAGANCIAS</Link>
           </li>
         </ul>
-        <Link to="/cart"><CartWidget counter={counter} /></Link>
+        <Link to="/cart"><CartWidget/></Link>
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
