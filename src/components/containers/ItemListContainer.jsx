@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //COMPONENTS
 import ItemList from "../itemList/ItemList";
-import {mostrarArticulos} from "../helper/articulos";
 //HOOKS
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
+//DATABASE FIRESTORE
+import { collection, getDocs } from "firebase/firestore";
+import { dataBase } from "../../utils/firebase";
 //STYLES
 import styled from "styled-components";
 
@@ -14,7 +16,14 @@ const ItemListContainer = ({ greeting }) => {
 
   useEffect(() => {
     const respuestaArticulos = async () => {
-      const listadoArticulos = await mostrarArticulos();
+      //Consulta a la base de datos
+      const query = collection(dataBase, "productos");//accede a la coleccion donde tenemos los productos
+      const response = await getDocs(query);//obtiene los documentos de la coleccion
+      //nos trae todos los objetos de la coleccion de objetos 
+      const docs = response.docs;
+      //iteramos la informacion para crear nuevos objetos con toda la informacion tanto el objeto con la informacion + el id de cada producto
+      const listadoArticulos = docs.map(doc => {return {...doc.data(), id : doc.id }})
+
       if (categoryId === undefined){
         setProductos(listadoArticulos)
       }else{
