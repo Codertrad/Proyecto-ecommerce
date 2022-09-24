@@ -8,14 +8,15 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ producto }) => {
-  //Llamamos la funcion addProduct a traves de context que agrega un nuevo producto al array del carrito
+  //Llamamos la funcion addItem a traves de context que agrega un nuevo producto al array del carrito
   const { addItem } = useContext(CartContext);
+  //Destructuracion de objeto producto 
   const { title, description, price, pictureUrl } = producto;
 
   //Esta funcion trae desde el ItemCount la propiedad count que es el contador
   const onAdd = (count) => {
-    const newPoduct = producto;
-    addItem(newPoduct, count);
+    //Le pasamos a la funcion que viene del cartContext la informacion del producto y la cantidad
+    addItem(producto, count);
   };
 
   return (

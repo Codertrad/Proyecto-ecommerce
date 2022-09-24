@@ -6,13 +6,13 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
 const CartWidget = () => {
-  const {quantity} = useContext(CartContext)
+  const {getTotalProducts} = useContext(CartContext)
   return (
     <Cart>
       <span className="icon">
         <FaShoppingCart />
       </span>
-      <span className={`${quantity <= 0 ? "inactive": "counter" }`}>{quantity}</span>
+      <span className={`${getTotalProducts() <= 0 ? "inactive": "counter" }`}>{getTotalProducts()}</span>
     </Cart>
   );
 };

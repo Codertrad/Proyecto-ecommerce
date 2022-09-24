@@ -9,12 +9,12 @@ import { BsCartXFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const CartContainer = () => {
-  const { productCartList, removeItem, clear, total } = useContext(CartContext);
+  const { productCartList, removeItem, clear, getTotalPrice } =
+    useContext(CartContext);
 
   return (
     <>
       <CartView>
-        <h2 className="titleCart">CARRITO DE COMPRAS</h2>
         {productCartList.length === 0 ? (
           <EmpytCartContainer>
             <BsCartXFill className="cartEmpyt" />
@@ -24,34 +24,52 @@ const CartContainer = () => {
             </Link>
           </EmpytCartContainer>
         ) : (
-          <ContainerCart>
-            <InfoCart>
-              <h3>Producto</h3>
-              <h3>Cantidad</h3>
-              <h3>Precio</h3>
-            </InfoCart>
-            {productCartList.map((producto, index) => (
-              <ItemCart key={index}>
-                <img className="imageItem" src={producto.pictureUrl} alt="" />
-                <h3 className="titleItem">{producto.title}</h3>
-                <hr />
-                <span className="quantityItem">{producto.quantity}</span>
-                <hr />
-                <h3 className="priceItem">$ {producto.price}</h3>
-                <hr />
-                <button
-                  className="removeItem"
-                  onClick={() => removeItem(producto.id, producto.quantity)}
-                >
-                  <IoTrashSharp />
+          <>
+            <TabMenu>
+              <Link to="/cart" className="arrowRight arrowActive">
+                Confirma tu orden
+              </Link>
+              <Link to="/checkout" className="arrowRight">
+                Datos de envio
+              </Link>
+              <span className="arrowRight">Realizar pago</span>
+            </TabMenu>
+            <ContainerCart>
+              <InfoCart>
+                <h3>Producto</h3>
+                <h3>Cantidad</h3>
+                <h3>Precio</h3>
+              </InfoCart>
+              {productCartList.map((producto, index) => (
+                <ItemCart key={index}>
+                  <img className="imageItem" src={producto.pictureUrl} alt="" />
+                  <h3 className="titleItem">{producto.title}</h3>
+                  <hr />
+                  <span className="quantityItem">{producto.quantity}</span>
+                  <hr />
+                  <h3 className="priceItem">$ {producto.price}</h3>
+                  <hr />
+                  <button
+                    className="removeItem"
+                    onClick={() => removeItem(producto.id)}
+                  >
+                    <IoTrashSharp />
+                  </button>
+                </ItemCart>
+              ))}
+              <p className="totalPrice">
+                VALOR TOTAL = $ {getTotalPrice()} COP
+              </p>
+              <div className="buttons">
+                <button className="buttonsCart" onClick={clear}>
+                  Limpiar carrito
                 </button>
-              </ItemCart>
-            ))}
-            <p className="totalPrice">VALOR TOTAL = $ {total} COP</p>
-            <button className="clearCart" onClick={clear}>
-              Limpiar carrito
-            </button>
-          </ContainerCart>
+                <Link to="/checkout" className="buttonsCart">
+                  Finalizar compra
+                </Link>
+              </div>
+            </ContainerCart>
+          </>
         )}
       </CartView>
     </>
@@ -102,9 +120,12 @@ const EmpytCartContainer = styled.div`
 `;
 
 const ContainerCart = styled.div`
-  .clearCart {
-    display: block;
+  .buttons {
+    display: flex;
     margin: 3rem auto;
+    justify-content: space-evenly;
+  }
+  .buttonsCart {
     background-color: #9941ec;
     color: white;
     border: none;
@@ -113,21 +134,85 @@ const ContainerCart = styled.div`
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all ease-in 0.3s;
+
     &:hover {
       background-color: #d32be2c7;
     }
   }
-  .totalPrice{
+  .totalPrice {
     margin: 0 auto;
     font-weight: bolder;
     font-size: 1.2rem;
     background-color: #d32be227;
-    padding:.3rem ;
+    padding: 0.3rem;
     text-align: end;
     max-width: 90%;
     @media (min-width: 768px) {
-    max-width:80%;
+      max-width: 80%;
+    }
   }
+`;
+
+const TabMenu = styled.div`
+  margin-top: 3rem;
+  font-weight: bold;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .arrowRight {
+    font-size: 1.1rem;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0rem;
+    width: 10rem;
+    height: 30px;
+    background: #f8f8f8;
+    border: solid 1px #d32be2;
+    float: left;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .arrowRight:before,
+  .arrowRight:after {
+    border-bottom: 15px solid transparent;
+    border-top: 15px solid transparent;
+    top: -1px;
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+  }
+  .arrowRight:after {
+    border-left: 16px solid #f8f8f8;
+    right: -14px;
+    z-index: 2;
+  }
+
+  .arrowRight:before {
+    border-left: 16px solid #d32be2;
+    right: -16px;
+    z-index: 1;
+  }
+
+  .arrowActive {
+    color: white;
+    background-color: #d32be2;
+    &::after {
+      border-left: 16px solid #d32be2;
+      right: -17px;
+    }
+    &::before {
+      border-left: 17px solid #d32be2;
+    }
   }
 `;
 
@@ -137,7 +222,7 @@ const InfoCart = styled.div`
   max-width: 65%;
   margin: 2.5rem auto -0.8rem 6rem;
   @media (min-width: 768px) {
-    max-width:80%;
+    max-width: 80%;
   }
 `;
 
@@ -184,6 +269,6 @@ const ItemCart = styled.div`
     }
   }
   @media (min-width: 768px) {
-    max-width:80%;
+    max-width: 80%;
   }
 `;
