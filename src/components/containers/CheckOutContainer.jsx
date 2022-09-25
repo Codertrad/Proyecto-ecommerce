@@ -10,19 +10,22 @@ import { useState } from "react";
 import styled from "styled-components";
 //Routes
 import { Link } from "react-router-dom";
+//SweetAlert
+import Swal from "sweetalert2";
 
 const CheckOutContainer = () => {
+  //Importamos con use context los items del carrito y el precio total de la compra
   const { productCartList, getTotalPrice } = useContext(CartContext);
-  const [idOrder, setIdOrder] = useState("");
-  const [clicked, setClicked] = useState(false)
+  //Manejador de click para desaparecer el boton de compra y evitar duplicacion de ordenes
+  const [clicked, setClicked] = useState(false);
 
-  const handlerClick = ()=>{
-   setClicked(!clicked)
-  }
-
+  //Funcion que recibe los datos del evento submit
   const sendOrder = (e) => {
+    //evita el recargo de la pagina
     e.preventDefault();
-
+    //cambia el estado del click de false a true
+    setClicked(!clicked);
+    //objeto que recibe valores del formulario y el total del valor de la compra
     const order = {
       buyer: {
         name: e.target[0].value,
@@ -36,7 +39,20 @@ const CheckOutContainer = () => {
     //Crear la referencia en la base de datos donde voy a guardar el documento
     const queryRef = collection(dataBase, "ordenes de compra");
     //agregamos el documento y obtenemos el id de ref de la orden
-    addDoc(queryRef, order).then((respuesta) => setIdOrder(respuesta.id));
+    addDoc(queryRef, order).then((respuesta) => {
+      //Al recibir la respuesta mostramos una alerta personalizada que muestra el id de la orden y al darle al boton de la alerta redirecciona a la pagina de inicio y recarga la pagina
+      Swal.fire({
+        icon: "success",
+        title: "Tu compra ha sido exitosa",
+        html: `<p>Tu numero de orden es:  <b>${respuesta.id}</b></p>`,
+        confirmButtonText: "Finalizar compra",
+        confirmButtonColor: "#9941ec",
+      }).then((response) => {
+        if (response.isConfirmed) {
+          window.location.replace("/");
+        }
+      });
+    });
   };
 
   return (
@@ -68,8 +84,9 @@ const CheckOutContainer = () => {
             <h4>Correo Electronico:</h4>
             <input type="email" placeholder="Correo electronico" />
           </div>
-          <button className={`${clicked ? "inActive" : ""}`} onClick={handlerClick} type="submit">Pagar ahora</button>
-          <h3 className={`${clicked ? "" : "inActive"}`}>Tu compra ha sido realizada con exito!</h3>
+          <button className={`${clicked ? "inActive" : ""}`} type="submit">
+            Pagar ahora
+          </button>
         </form>
       </FormContainer>
     </>
@@ -107,28 +124,37 @@ const FormContainer = styled.div`
     }
   }
 
-  .inActive{
-   display: none;
+  .inActive {
+    display: none;
   }
 
   input {
     text-align: center;
     font-size: 1.2rem;
     border: 2px solid #9941ec;
-    border-radius: .5rem;
-    &::placeholder{
-      color:#e5e1e1;
+    border-radius: 0.5rem;
+    &::placeholder {
+      color: #e5e1e1;
     }
-    &:focus{
+    &:focus {
       outline-color: #d32be2c7;
     }
   }
 
-  h3{
-   margin-top: 2rem;
-   text-align: center;
-   font-size: 3rem;
-   color: #d32be2c7;
+  h3 {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 3rem;
+    color: #d32be2c7;
+  }
+
+  @media (min-width: 1024px) {
+    width: 60%;
+    margin: 2rem auto;
+  }
+  @media (min-width: 1444px) {
+    width: 40%;
+    margin: 2rem auto;
   }
 `;
 
