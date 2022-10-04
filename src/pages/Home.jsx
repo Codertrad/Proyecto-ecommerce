@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
     <SlideShow/>
-    <ItemListContainer greeting="Hola Bienvenidos a mi e-commerce"/>
+    <ItemListContainer greeting="TODOS LOS PRODUCTOS"/>
     </>
   )
 }

@@ -3,7 +3,7 @@
 import ItemList from "../itemList/ItemList";
 //HOOKS
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 //DATABASE FIRESTORE
 import { collection, getDocs } from "firebase/firestore";
 import { dataBase } from "../../utils/firebase";
@@ -12,32 +12,40 @@ import styled from "styled-components";
 
 const ItemListContainer = ({ greeting }) => {
   const [productos, setProductos] = useState([]);
-  const {categoryId} = useParams();
+  const { categoryId } = useParams();
 
   useEffect(() => {
     const respuestaArticulos = async () => {
       //Consulta a la base de datos
-      const query = collection(dataBase, "productos");//accede a la coleccion donde tenemos los productos
-      const response = await getDocs(query);//obtiene los documentos de la coleccion
-      //nos trae todos los objetos de la coleccion de objetos 
+      const query = collection(dataBase, "productos"); //accede a la coleccion donde tenemos los productos
+      const response = await getDocs(query); //obtiene los documentos de la coleccion
+      //nos trae todos los objetos de la coleccion de objetos
       const docs = response.docs;
       //iteramos la informacion para crear nuevos objetos con toda la informacion tanto el objeto con la informacion + el id de cada producto
-      const listadoArticulos = docs.map(doc => {return {...doc.data(), id : doc.id }})
+      const listadoArticulos = docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
 
-      if (categoryId === undefined){
-        setProductos(listadoArticulos)
-      }else{
-        const filtrado = listadoArticulos.filter(articulo => articulo.category === categoryId)
-        setProductos(filtrado)
+      if (categoryId === undefined) {
+        setProductos(listadoArticulos);
+      } else {
+        const filtrado = listadoArticulos.filter(
+          (articulo) => articulo.category === categoryId
+        );
+        setProductos(filtrado);
       }
     };
-    respuestaArticulos()
+    respuestaArticulos();
   }, [categoryId]);
 
   return (
     <>
       <Container>
-        <h1>{greeting} {categoryId}</h1>
+        <h1>
+          {greeting} {categoryId}
+        </h1>
+        <hr className="box" />
+        <hr className="line"/>
         <ItemList articulos={productos} />
       </Container>
     </>
@@ -49,9 +57,26 @@ export default ItemListContainer;
 const Container = styled.div`
   text-align: center;
   font-size: 2rem;
-  h1{
-    margin:2rem 0;
+  h1 {
+    margin: 2rem 0;
     font-size: 2rem;
-
-    }
+    text-transform: uppercase;
+    color:#474d4b;
+  }
+  .line{
+    border: none;
+    margin: 0 auto;
+    //margin-top: -1rem;
+    width: 60%;
+    height: .1rem;
+    background-color: #e2e2e2;
+  }
+  .box{
+    margin: 0 auto;
+    margin-top: -1rem;
+    border: none;
+    width: 15%;
+    height:.5rem;
+    background-color: #e2e2e2;
+  }
 `;

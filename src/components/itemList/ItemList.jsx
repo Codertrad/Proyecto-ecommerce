@@ -17,6 +17,7 @@ const ItemList = ({articulos}) => {
 export default ItemList
 
 const ContainerProducts = styled.div`
+margin: 2rem auto;
 @media (min-width: 768px) {
    .container{
       display: flex;
